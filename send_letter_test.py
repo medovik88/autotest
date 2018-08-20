@@ -18,6 +18,7 @@ class SendLetterTest(unittest.TestCase):
         password_field.send_keys("231488gor")
         button_login = driver.find_element_by_xpath("/html/body/div/div/main/form/button/div")
         button_login.click()
+        
 
         user_mail = driver.find_element_by_xpath("//*[@class='login-button__user']")
 
