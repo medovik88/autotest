@@ -26,9 +26,11 @@ class SendLetterTest(unittest.TestCase):
         password_field.send_keys("0937536859yk")
         button_login = driver.find_element_by_xpath("/html/body/div/div/main/form/button/div")
         button_login.click()
+
 # Compare e-mail field with our e-mail to be sure that is right account
         user_mail = driver.find_element_by_xpath("//*[@class='login-button__user']")
         assert user_mail.text == "yuriy.komrakov@ukr.net"
+
 # Create variable mail_counter to count up letters we have got before creating new letter
         try:
             counter = int(driver.find_element_by_xpath("//*[@id='0']/span[2]").text)
@@ -36,6 +38,7 @@ class SendLetterTest(unittest.TestCase):
             mail_counter = 0
         else:
             mail_counter = counter
+
 # Create new letter
         button_write_letter = driver.find_element_by_xpath("//*[@id='content']/aside/button")
         button_write_letter.click()
@@ -48,13 +51,17 @@ class SendLetterTest(unittest.TestCase):
         text = "Вы справились с тестовым заданием. Поздравляем! Вы приняты на работу в компанию Asferro."
         main_text_field.send_keys(text)
         driver.switch_to.default_content()
+
 # Send the letter
         button_send = driver.find_element_by_xpath("//*[@id='screens']/div/div[1]/div/button")
         button_send.click()
+
 # Wait until the letter is delivered
         time.sleep(3)
+
 # Refresh page and compare mail_counter with number of letters in this moment
         driver.refresh()
         new_letter = int(driver.find_element_by_xpath("//*[@id='0']/span[2]").text)
         assert (mail_counter + 1) == new_letter
+
 # Expected result: number of letters should be equal (mail_counter + 1)
